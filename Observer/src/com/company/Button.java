@@ -5,13 +5,18 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
 public class Button extends JPanel implements MouseListener {
     private Circle b = new Circle();
-
+    private ButtonObservable _buttonObservable;
     public Button() {
         this.addMouseListener(this);
+        Sub1 sub1 = new Sub1();
+        Sub2 sub2 = new Sub2();
+        _buttonObservable = new ButtonObservable();
+        _buttonObservable.addSub(sub1);
+        _buttonObservable.addSub(sub2);
     }
+
 
     @Override
     public void paint(Graphics g) {
@@ -25,14 +30,11 @@ public class Button extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            Sub1.massage("Левая кнопка мыши");
-            Sub2.history("ЛКМ");
+            _buttonObservable.updateSubs("ЛКМ");
         }
         repaint();
         if (e.getButton() == MouseEvent.BUTTON3) {
-
-            Sub1.massage("Правая кнопка мыши");
-            Sub2.history("ПКМ");
+            _buttonObservable.updateSubs("ПКМ");
         }
         repaint();
     }

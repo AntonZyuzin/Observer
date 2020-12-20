@@ -2,11 +2,13 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Sub2 {
+public class Sub2 implements Observer {
     public static final ArrayList<String> journal = new ArrayList<>();
 
-    public static void history(String click) {
-        journal.add(click);
+
+    @Override
+    public void update(String msg) {
+        journal.add(msg);
         System.out.println(journal);
     }
 }
